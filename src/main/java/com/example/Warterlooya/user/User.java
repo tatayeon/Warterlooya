@@ -20,12 +20,19 @@ public class User {
 
     private RoleType role;
 
-    private String Gender;
+    private String gender;
 
-    private String weight;
+    private Long weight;
 
     private boolean oldAge;
 
     private String weather;
 
+    public User(RoleType roleType, String gender, Long weight, boolean oldAge, String weather) {
+        this.role = roleType;
+        this.gender = gender;
+        this.weight = weight;
+        this.oldAge = oldAge;
+        this.weather = weather;
+    }
 }
