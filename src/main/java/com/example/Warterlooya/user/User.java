@@ -22,13 +22,13 @@ public class User {
 
     private String gender;
 
-    private Long weight;
+    private int weight;
 
     private boolean oldAge;
 
     private String weather;
 
-    public User(RoleType roleType, String gender, Long weight, boolean oldAge, String weather) {
+    public User(RoleType roleType, String gender, int weight, boolean oldAge, String weather) {
         this.role = roleType;
         this.gender = gender;
         this.weight = weight;

@@ -7,7 +7,7 @@ public class RequestRegisterDTO {
 
     private String gender;
 
-    private Long weight;
+    private int weight;
 
     private boolean oldAge;
 
