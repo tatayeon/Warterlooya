@@ -18,6 +18,10 @@ public class User {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    private String username;
+
+    private String password;
+
     private RoleType role;
 
     private String gender;
@@ -28,7 +32,9 @@ public class User {
 
     private String weather;
 
-    public User(RoleType roleType, String gender, int weight, boolean oldAge, String weather) {
+    public User(String username, String password, RoleType roleType, String gender, int weight, boolean oldAge, String weather) {
+        this.username = username;
+        this.password = password;
         this.role = roleType;
         this.gender = gender;
         this.weight = weight;

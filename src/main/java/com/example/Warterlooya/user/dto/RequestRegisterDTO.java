@@ -5,6 +5,10 @@ import lombok.Getter;
 @Getter
 public class RequestRegisterDTO {
 
+    private String username;
+
+    private String password;
+
     private String gender;
 
     private int weight;
