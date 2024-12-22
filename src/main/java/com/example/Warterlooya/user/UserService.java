@@ -6,10 +6,14 @@ import com.example.Warterlooya.security.jwt.JwtUtil;
 import com.example.Warterlooya.user.dto.LoginDTO;
 import com.example.Warterlooya.user.dto.RequestRegisterDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +49,8 @@ public class UserService {
 
     }
 
+
+
     public ResponseEntity<Boolean> checkUserName(String username) {
         User user = userRepository.findByUsername(username);
 
@@ -53,6 +59,7 @@ public class UserService {
         } else {
             return ResponseEntity.ok(false);
         }
-
     }
+
+
 }

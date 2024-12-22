@@ -3,6 +3,7 @@ package com.example.Warterlooya.user;
 import com.example.Warterlooya.user.dto.LoginDTO;
 import com.example.Warterlooya.user.dto.RequestRegisterDTO;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,17 @@ public class UserContoroller {
         return ResponseEntity.status(HttpStatus.OK).body(status);
 
     }
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
+        // 쿠키 삭제
+        Cookie cookie = new Cookie("accessToken", null);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(0); // 즉시 만료
+        response.addCookie(cookie);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Logged out successfully");
+    }
 
     @PostMapping("/check/username/{username}")
     public ResponseEntity<Boolean> checkUsername(@PathVariable("username") String username){
@@ -82,6 +94,5 @@ public class UserContoroller {
         }
         return true;
     }
-
 
 }
