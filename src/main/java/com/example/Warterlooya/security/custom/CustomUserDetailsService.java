@@ -1,7 +1,7 @@
 package com.example.Warterlooya.security.custom;
 
-import com.example.Warterlooya.user.User;
-import com.example.Warterlooya.user.UserRepository;
+import com.example.Warterlooya.domain.User;
+import com.example.Warterlooya.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

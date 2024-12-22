@@ -1,19 +1,17 @@
-package com.example.Warterlooya.user;
+package com.example.Warterlooya.service;
 
+import com.example.Warterlooya.domain.User;
 import com.example.Warterlooya.enumration.RoleType;
 import com.example.Warterlooya.security.custom.CustomUserInfoDto;
 import com.example.Warterlooya.security.jwt.JwtUtil;
-import com.example.Warterlooya.user.dto.LoginDTO;
-import com.example.Warterlooya.user.dto.RequestRegisterDTO;
+import com.example.Warterlooya.repository.UserRepository;
+import com.example.Warterlooya.requstDTO.LoginDTO;
+import com.example.Warterlooya.requstDTO.RequestRegisterDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
