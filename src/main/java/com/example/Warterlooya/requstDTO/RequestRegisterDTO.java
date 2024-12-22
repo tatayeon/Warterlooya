@@ -1,4 +1,4 @@
-package com.example.Warterlooya.user.dto;
+package com.example.Warterlooya.requstDTO;
 
 import lombok.Getter;
 

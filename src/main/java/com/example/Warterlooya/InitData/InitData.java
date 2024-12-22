@@ -1,8 +1,8 @@
 package com.example.Warterlooya.InitData;
 
 import com.example.Warterlooya.enumration.RoleType;
-import com.example.Warterlooya.user.User;
-import com.example.Warterlooya.user.UserRepository;
+import com.example.Warterlooya.domain.User;
+import com.example.Warterlooya.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
