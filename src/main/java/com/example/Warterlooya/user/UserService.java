@@ -44,4 +44,15 @@ public class UserService {
         return jwtUtil.createAccessToken(customUserInfoDto);
 
     }
+
+    public ResponseEntity<Boolean> checkUserName(String username) {
+        User user = userRepository.findByUsername(username);
+
+        if(user == null) {
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.ok(false);
+        }
+
+    }
 }
