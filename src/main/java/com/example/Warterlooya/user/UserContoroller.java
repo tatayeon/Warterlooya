@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -48,6 +45,12 @@ public class UserContoroller {
         insertToken(status);
         return ResponseEntity.status(HttpStatus.OK).body(status);
 
+    }
+
+    @PostMapping("/check/username/{username}")
+    public ResponseEntity<Boolean> checkUsername(@PathVariable("username") String username){
+        System.out.println("username = " + username);
+        return userService.checkUserName(username);
     }
 
     public void insertToken(String token) {
