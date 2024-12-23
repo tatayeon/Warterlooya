@@ -2,6 +2,7 @@ package com.example.Warterlooya.domain;
 
 import com.example.Warterlooya.enumration.RoleType;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -34,6 +35,7 @@ public class User {
 
     private String weather;
 
+
     public User(String username, String password, RoleType roleType, String gender, int weight, boolean oldAge, String weather) {
         this.username = username;
         this.password = password;
@@ -45,5 +47,5 @@ public class User {
     }
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private List<Record> records = new ArrayList<>();
+    private List<DrinkRecord> records = new ArrayList<>();
 }
