@@ -2,6 +2,7 @@ package com.example.Warterlooya.domain;
 
 import com.example.Warterlooya.enumration.DrinkType;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Record {
+public class DrinkRecord {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -26,8 +27,8 @@ public class Record {
     private int amount;
 
 
-
-    public Record(LocalDateTime time, DrinkType drinkType, int amount, User users) {
+    @Builder
+    public DrinkRecord(LocalDateTime time, DrinkType drinkType, int amount, User users) {
         this.time = time;
         this.drinkType = drinkType;
         this.amount = amount;
