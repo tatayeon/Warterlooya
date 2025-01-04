@@ -3,6 +3,7 @@ package com.example.Warterlooya.contoroller;
 import com.example.Warterlooya.domain.User;
 import com.example.Warterlooya.requstDTO.AddRecordDTO;
 import com.example.Warterlooya.responsDTO.OneDayRecordDTO;
+import com.example.Warterlooya.responsDTO.WeekRecordDTO;
 import com.example.Warterlooya.security.custom.CustomUserDetails;
 import com.example.Warterlooya.service.DrinkRecordService;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +35,20 @@ public class RecordContorller {
     public ResponseEntity<List<OneDayRecordDTO>> viewRecord(@AuthenticationPrincipal CustomUserDetails user) {
         LocalDate today = LocalDate.now(); // 오늘 날짜
         Long userId = user.getUserId();
-
         List<OneDayRecordDTO> result = recordService.getAmountsByTimeOfDay(userId, today);
+        return ResponseEntity.ok(result);
+    }
 
+    @GetMapping("/view/week")
+    public ResponseEntity<List<WeekRecordDTO>> weekRecord(@AuthenticationPrincipal CustomUserDetails user) {
+        // 현재 날짜 및 사용자 ID 가져오기
+        LocalDate today = LocalDate.now();
+        Long userId = user.getUserId();
+
+        // 주간 데이터 조회
+        List<WeekRecordDTO> result = recordService.getAmountsByWeek(userId, today);
+
+        // 결과 반환
         return ResponseEntity.ok(result);
     }
 
