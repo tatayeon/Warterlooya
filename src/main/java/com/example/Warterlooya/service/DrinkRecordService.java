@@ -6,11 +6,13 @@ import com.example.Warterlooya.repository.DrinkRecordRepository;
 import com.example.Warterlooya.repository.UserRepository;
 import com.example.Warterlooya.requstDTO.AddRecordDTO;
 import com.example.Warterlooya.responsDTO.OneDayRecordDTO;
+import com.example.Warterlooya.responsDTO.WeekRecordDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -65,5 +67,20 @@ public class DrinkRecordService {
                 .collect(Collectors.toList());
         return collect;
     }
+
+    public List<WeekRecordDTO> getAmountsByWeek(Long userId, LocalDate today) {
+        LocalDate weekStartDate = today.with(DayOfWeek.MONDAY);
+        LocalDate weekEndDate = today.with(DayOfWeek.SUNDAY);
+
+        List<Object[]> weeklyTotalAmounts = recordRepository.findWeeklyTotalAmounts(userId, weekStartDate, weekEndDate);
+
+        return weeklyTotalAmounts.stream()
+                .map(record -> new WeekRecordDTO(
+                        ((java.sql.Date) record[0]).toLocalDate(), // java.sql.Date -> java.time.LocalDate 변환
+                        ((Number) record[1]).intValue()
+                ))
+                .collect(Collectors.toList());
+    }
+
 
 }
