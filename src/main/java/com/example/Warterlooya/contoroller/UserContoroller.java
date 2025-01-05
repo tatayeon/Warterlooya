@@ -3,6 +3,11 @@ package com.example.Warterlooya.contoroller;
 import com.example.Warterlooya.service.UserService;
 import com.example.Warterlooya.requstDTO.LoginDTO;
 import com.example.Warterlooya.requstDTO.RequestRegisterDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,11 +24,14 @@ import java.net.URLEncoder;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@Tag(name = "User API", description = "user관련 로그인 및 회원가입 등등")
 public class UserContoroller {
 
      private final UserService userService;
 
     @PostMapping("/register")
+    @Operation(summary = "회원 가입 기능", description = "회원가입에 사용되는 API")
+    @ApiResponse(responseCode = "200", description = "회원 가입 성공", content = @Content(mediaType = "application/json"))
     public String register(@RequestBody RequestRegisterDTO registerDTO){
 //        System.out.println(registerDTO.getGender());
         userService.register(registerDTO);
@@ -35,6 +43,11 @@ public class UserContoroller {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "회원 로그인 기능", description = "로그인에 사용되는 API")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "로그인 성공", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "401", description = "로그인 실패", content = @Content(mediaType = "application/json"))
+    })
     public ResponseEntity<String> login(@RequestBody LoginDTO dto){
         System.out.println("dto = " + dto);
         String status = userService.login(dto);
@@ -47,7 +60,13 @@ public class UserContoroller {
         return ResponseEntity.status(HttpStatus.OK).body(status);
 
     }
+
+
     @PostMapping("/logout")
+    @Operation(summary = "로그아웃 기능", description = "로그아웃에 사용되는 API")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "로구아웃 성공", content = @Content(mediaType = "application/json"))
+    })
     public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
         // 쿠키 삭제
         Cookie cookie = new Cookie("accessToken", null);
@@ -59,6 +78,12 @@ public class UserContoroller {
         return ResponseEntity.status(HttpStatus.OK).body("Logged out successfully");
     }
 
+    @GetMapping("/check/email/{email}")
+    @Operation(summary = "아이디(이메일) 중복 검사", description = "회원 가입 시 아이디(이메일) 중복 검사 API")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "사용 가능한 아이디", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "409", description = "중복 아이디", content = @Content(mediaType = "application/json"))
+    })
     @PostMapping("/check/username/{username}")
     public ResponseEntity<Boolean> checkUsername(@PathVariable("username") String username){
         System.out.println("username = " + username);
